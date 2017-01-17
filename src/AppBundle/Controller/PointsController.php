@@ -56,7 +56,11 @@ class PointsController extends FOSRestController
             return $this->handleView($view);
         }
 
+        $em = $this->getDoctrine()->getManager();
         $view = $this->view($point, 200);
+
+        $em->persist($point);
+        $em->flush();
 
         return $this->handleView($view);
     }
