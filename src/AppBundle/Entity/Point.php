@@ -51,6 +51,14 @@ class Point
     private $long;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="icon", type="string")
+     * @Assert\NotBlank()
+     */
+    private $icon = 'chevron-down';
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
@@ -114,6 +122,30 @@ class Point
     public function getLong()
     {
         return $this->long;
+    }
+
+    /**
+     * Set icon
+     *
+     * @param string $icon
+     *
+     * @return Point
+     */
+    public function setIcon($icon)
+    {
+        $this->icon = $icon;
+
+        return $this;
+    }
+
+    /**
+     * Get icon
+     *
+     * @return string
+     */
+    public function getIcon()
+    {
+        return $this->icon;
     }
 
     /**

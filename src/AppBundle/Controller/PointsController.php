@@ -42,10 +42,15 @@ class PointsController extends FOSRestController
     public function postPointsAction(Request $request)
     {
         $point = new Point();
+        $input = $request->request;
 
-        $point->setLat($request->request->get('lat'));
-        $point->setLong($request->request->get('long'));
+        $point->setLat($input->get('lat'));
+        $point->setLong($input->get('long'));
         $point->setCreatedAt(new DateTime());
+
+        if ($input->has('icon')) {
+            $point->setIcon($input->get('icon'));
+        }
 
         $validator = $this->get('validator');
         $errors = $validator->validate($point);
