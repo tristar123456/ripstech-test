@@ -82,7 +82,6 @@ class PointsController extends FOSRestController
             $em->flush();
         }
 
-
         return $this->handleView($view);
     }
 }
