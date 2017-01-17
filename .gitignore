@@ -36,6 +36,9 @@
 /app/phpunit.xml
 /phpunit.xml
 
+# SQLite
+/app/sqlite.db
+
 # Build data
 /build/
 
