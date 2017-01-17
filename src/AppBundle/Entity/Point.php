@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Point
@@ -25,6 +26,13 @@ class Point
      * @var float
      *
      * @ORM\Column(name="lat", type="float")
+     * @Assert\NotBlank()
+     * @Assert\Range(
+     *  min = -90,
+     *  max = 90,
+     *  minMessage = "Latitude range cannot be less than {{ limit }} degrees",
+     *  maxMessage = "Latitude range cannot be greater than {{ limit }} degrees"
+     * )
      */
     private $lat;
 
@@ -32,6 +40,13 @@ class Point
      * @var float
      *
      * @ORM\Column(name="long", type="float")
+     * @Assert\NotBlank()
+     * @Assert\Range(
+     *  min = -180,
+     *  max = 180,
+     *  minMessage = "Longitude range cannot be less than {{ limit }} degrees",
+     *  maxMessage = "Longitude range cannot be greater than {{ limit }} degrees"
+     * )
      */
     private $long;
 
