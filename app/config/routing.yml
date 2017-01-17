@@ -1,3 +1,7 @@
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+
+points:
+    type: rest
+    resource: AppBundle\Controller\PointsController
