@@ -44,8 +44,25 @@ class PointsController extends FOSRestController
         $point = new Point();
         $input = $request->request;
 
-        $point->setLat($input->get('lat'));
-        $point->setLong($input->get('long'));
+        if ($input->has('ip')) {
+            $ip = $input->get('ip');
+
+            if (filter_var($ip, FILTER_VALIDATE_IP)) {
+                $geoip = $this->get('maxmind.geoip')->lookup($ip);
+
+                $lat = $geoip->getLatitude();
+                $long = $geoip->getLongitude();
+            } else {
+                $error = ['message' => 'Invalid IP address provided.'];
+                $view = $this->view($error, 400);
+            }
+        } else {
+            $lat = $input->get('lat');
+            $long = $input->get('long');
+        }
+
+        $point->setLat($lat);
+        $point->setLong($long);
         $point->setCreatedAt(new DateTime());
 
         if ($input->has('icon')) {
@@ -57,15 +74,14 @@ class PointsController extends FOSRestController
 
         if (count($errors) > 0) {
             $view = $this->view($errors, 400);
+        } else {
+            $em = $this->getDoctrine()->getManager();
+            $view = $this->view($point, 200);
 
-            return $this->handleView($view);
+            $em->persist($point);
+            $em->flush();
         }
 
-        $em = $this->getDoctrine()->getManager();
-        $view = $this->view($point, 200);
-
-        $em->persist($point);
-        $em->flush();
 
         return $this->handleView($view);
     }
