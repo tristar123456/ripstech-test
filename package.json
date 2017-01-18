@@ -24,6 +24,7 @@
     "gulp-modern-tasks": "^1.0.6"
   },
   "dependencies": {
+    "drmonty-leaflet-awesome-markers": "^2.0.2",
     "leaflet": "^1.0.2",
     "react": "^15.4.2",
     "react-async-poll": "^1.0.0",
