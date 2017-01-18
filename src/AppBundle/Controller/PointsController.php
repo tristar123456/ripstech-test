@@ -14,13 +14,42 @@ class PointsController extends FOSRestController
         $options = [
             'endpoints' => [
                 'GET' => [
-                    '/users' => [
-                    
+                    '/points' => [
+                        'description' => 'Get collection of points data.',
+                        'parameters' => 'none',
                     ],
                 ],
                 'POST' => [
-                    '/users' => [
-                    
+                    '/points' => [
+                        'description' => 'Create new point. Either an IP or lat/long should be specified.',
+                        'parameters' => [
+                            'lat' => [
+                                'description' => 'Latitude of new point',
+                                'type' => 'float',
+                                'required' => false,
+                            ],
+                            'long' => [
+                                'description' => 'Longitude of new point',
+                                'type' => 'float',
+                                'required' => false,
+                            ],
+                            'ip' => [
+                                'description' => 'IP address that will be converted to lat/long via geolocation',
+                                'type' => 'string',
+                                'required' => false,
+                            ],
+                            'icon' => [
+                                'description' => 'Font-Awesome icon name to be used on marker.',
+                                'type' => 'string',
+                                'required' => false,
+                            ],
+                        ],
+                        'example' => [
+                            'lat' => 55.55,
+                            'long' => 55.55,
+                            'ip' => '192.168.1.1',
+                            'icon' => 'home',
+                        ],
                     ],
                 ],
             ],
