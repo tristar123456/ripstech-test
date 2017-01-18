@@ -36,7 +36,6 @@ async function fetchPoints() {
   render(<App points={data} />, document.getElementById('app'));
 }
 
-setInterval(fetchPoints, 1000 * 3);
 fetchPoints();
 
 export default App;
