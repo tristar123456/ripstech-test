@@ -32,11 +32,8 @@ async function fetchPoints() {
   const options = {method: 'GET'};
   const response = await fetch('/points', options);
   const data = await response.json();
-  const formattedData = data.map(point => {
-    return {...point, ...{createdAt: point.created_at}};
-  });
 
-  render(<App points={formattedData} />, document.getElementById('app'));
+  render(<App points={data} />, document.getElementById('app'));
 }
 
 setInterval(fetchPoints, 1000 * 3);
