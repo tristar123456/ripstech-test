@@ -4,16 +4,16 @@ import {VectorMarkers} from 'Leaflet.vector-markers';
 
 function parseColor(createdAt) {
   const sixHoursAgo = new Date();
-  const dayAgo = new Date();
+  const oneHourAgo = new Date();
   const created = new Date(createdAt);
-  let color = '#ff0000';
+  let color = '#d3d3d3';
 
+  oneHourAgo.setHours(oneHourAgo.getHours() - 1);
   sixHoursAgo.setHours(sixHoursAgo.getHours() - 6);
-  dayAgo.setHours(dayAgo.getHours() - 24);
 
-  if (created.getTime() < dayAgo.getTime()) {
-    color = '#d3d3d3';
-  } else if (created.getTime() < sixHoursAgo.getTime()) {
+  if (created.getTime() > oneHourAgo.getTime()) {
+    color = '#ff0000';
+  } else if (created.getTime() > sixHoursAgo.getTime()) {
     color = '#ff9999';
   }
 
@@ -21,18 +21,25 @@ function parseColor(createdAt) {
 }
 
 function Point(props = {}) {
+  const dayAgo = new Date();
+  const created = new Date(props.createdAt);
   const icon = VectorMarkers.icon({
     icon: props.icon,
     markerColor: parseColor(props.createdAt),
   });
+  let output = null;
 
-  return (
-    <Marker
+  dayAgo.setHours(dayAgo.getHours() - 24);
+
+  if (created.getTime() > dayAgo.getTime()) {
+    output = <Marker
       key={props.id}
       position={{lat: props.lat, lng: props.long}}
       icon={icon}
-    />
-  );
+    />;
+  }
+
+  return output;
 }
 
 Point.propTypes = {
