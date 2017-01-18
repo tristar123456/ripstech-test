@@ -1,11 +1,18 @@
 import React, {PropTypes} from 'react';
 import {Marker} from 'react-leaflet';
+import {VectorMarkers} from 'Leaflet.vector-markers';
 
 function Point(props = {}) {
+  const icon = VectorMarkers.icon({
+    icon: props.icon,
+    markerColor: 'red',
+  });
+
   return (
     <Marker
       key={props.id}
       position={{lat: props.lat, lng: props.long}}
+      icon={icon}
     />
   );
 }
