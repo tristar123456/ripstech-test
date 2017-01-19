@@ -55,6 +55,10 @@ class Point
      *
      * @ORM\Column(name="icon", type="string")
      * @Assert\NotBlank()
+     * @Assert\Regex(
+     *  pattern="/^[a-z](-?[a-z]+)*$/i",
+     *  message="Icon must be a valid Font-Aesome icon name, and may only contain letters and '-'"
+     * )
      */
     private $icon = 'chevron-down';
 
