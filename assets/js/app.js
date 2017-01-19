@@ -10,7 +10,7 @@ function App(props) {
   return (
     <Map center={position} zoom={3}>
       <TileLayer
-        url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+        url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       />
       {points && points.length ? points.map(point => Point(point)) : null}
