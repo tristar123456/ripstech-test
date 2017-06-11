@@ -5,3 +5,7 @@ app:
 points:
     type: rest
     resource: AppBundle\Controller\PointsController
+
+statistics:
+    type: rest
+    resource: AppBundle\Controller\StatisticsController
