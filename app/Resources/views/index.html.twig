@@ -1,16 +1,41 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
+<head>
+    <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>RIPSTech Test</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" media="all" />
-    <link rel="stylesheet" href="/dist/css/main.css" type="text/css" media="all" />
-  </head>
-  <body>
-    <div id="app"></div>
-    <script src="/dist/js/index.js" type="text/javascript" charset="utf-8"></script>
-  </body>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          type="text/css" media="all"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/superslides/0.6.2/stylesheets/superslides.min.css"
+          integrity="sha256-JOC7rBmaiSGpAsZU+tepFbvEYdXxTDbLDRHt0DDwpf0=" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="/dist/css/main.css" type="text/css" media="all"/>
+</head>
+<body>
+
+
+<div id="slides">
+    <div class="slides-container">
+        <div id="app"></div>
+        <div id="chart"></div>
+    </div>
+</div>
+
+<div id="controls">
+    <button onclick="togglePlay()">
+        <i class="fa fa-pause"></i>
+    </button>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/superslides/0.6.2/jquery.superslides.min.js"
+        integrity="sha256-BJ5ztlXSWc6WOZ5VMVCJgtKomDBVPstatOGAeCmDIZ8=" crossorigin="anonymous"></script>
+<script src="/dist/js/index.js" type="text/javascript" charset="utf-8"></script>
+</body>
 </html>
