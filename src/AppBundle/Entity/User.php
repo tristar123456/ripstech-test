@@ -39,11 +39,19 @@ class User implements UserInterface, \Serializable
     private $isActive;
 
     /**
+     * @var array
+     * @ORM\Column(name="roles", type="array", length=64)
+     */
+    private $roles;
+
+    const ROLE_DEFAULT = "ROLE_UI";
+    /**
      * User constructor.
      */
     public function __construct()
     {
         $this->isActive = true;
+        $this->roles = array();
     }
 
     /**
@@ -58,7 +66,8 @@ class User implements UserInterface, \Serializable
             $this->id,
             $this->getUsername(),
             $this->getPassword(),
-            $this->isActive
+            $this->isActive,
+            $this->roles
         ));
     }
 
@@ -79,7 +88,8 @@ class User implements UserInterface, \Serializable
             $this->id,
             $this->username,
             $this->password,
-            $this->isActive
+            $this->isActive,
+            $this->roles
             ) = unserialize($serialized);
     }
 
@@ -101,7 +111,16 @@ class User implements UserInterface, \Serializable
      */
     public function getRoles()
     {
-        return ['ROLE_USER'];
+        $role = $this->roles;
+        if (is_array($role)) {
+            $arr = array_merge($role, array(static::ROLE_DEFAULT));
+            return $arr;
+        }
+        else{
+            $this->addRole(static::ROLE_DEFAULT);
+            $arr = array(static::ROLE_DEFAULT);
+            return $arr;
+        }
     }
 
     /**
@@ -124,7 +143,7 @@ class User implements UserInterface, \Serializable
      */
     public function getUsername()
     {
-        $this->username;
+        return $this->username;
     }
 
     /**
@@ -163,5 +182,29 @@ class User implements UserInterface, \Serializable
     public function setPassword($password)
     {
         $this->password = $password;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addRole($role)
+    {
+        $role = strtoupper($role);
+        /*if($this->roles === null){
+            if($role === null) {
+                $this->roles[] = static::ROLE_DEFAULT;
+                return $this;
+            }
+            $this->roles[] = $role;
+            return $this;
+        }*/
+        if ($role === static::ROLE_DEFAULT) {
+            return $this;
+        }
+        if (!in_array($role, $this->roles, true)) {
+            $this->roles[] = $role;
+        }
+
+        return $this;
     }
 }
