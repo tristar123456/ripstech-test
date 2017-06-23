@@ -67,7 +67,7 @@ class PointsController extends FOSRestController
 
         return $this->handleView($view);
     }
-    
+
     public function postPointsAction(Request $request)
     {
         $point = new Point();
