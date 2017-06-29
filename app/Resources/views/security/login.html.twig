@@ -1,18 +1,50 @@
 <html>
 <head>
+    <style>
+        body{
+            font-family: "Courier New";
+            color: #5eb5e0;
+            background-image: url("https://wallpaperstock.net/black-linux-wallpapers_29927_1920x1080.jpg");
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+        input{
+            color: #7c8ea3;
+            padding: 0px;
+            margin: 0px;
+
+        }
+        button{
+            margin-top: 10px;
+        }
+        #box{
+            position: relative;
+            /*position: absolute;
+            top: 100px;
+            left: 100px;
+            right: 100px;
+            bottom: 100px;*/
+            text-align: center;
+            vertical-align: middle;
+            padding: 10%;
+            border: 5px dotted #00d68b;
+        }
+    </style>
     <title>login</title>
 </head>
 <body>
-    <form action="{{ path("login") }}" method="post">
-        <label for="username">
-            USERNAME:
-        </label>
-        <input type="text" id="username" name="_username">
-        <label for="password">
-            PASSWORD:
-        </label>
-        <input type="password" id="password" name="_password">
-        <button type="submit">LOGIN</button>
-    </form>
+    <div id="box">
+        <form action="{{ path("login") }}" method="post">
+            <label for="username">
+                USERNAME:
+            </label><br>
+            <input type="text" id="username" name="_username"><br>
+            <label for="password">
+                PASSWORD:
+            </label><br>
+            <input type="password" id="password" name="_password"><br>
+            <button type="submit">LOGIN</button>
+         </form>
+    </div>
 </body>
 </html>

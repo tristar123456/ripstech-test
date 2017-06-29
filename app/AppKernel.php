@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
             new FOS\RestBundle\FOSRestBundle(),
             new Maxmind\Bundle\GeoipBundle\MaxmindGeoipBundle(),
+            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

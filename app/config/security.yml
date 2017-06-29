@@ -33,5 +33,5 @@ security:
                 path: /logout
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/database/, roles: ROLE_UI }
+        - { path: ^/database, roles: ROLE_UI }
         - { path: ^/, roles: ROLE_API }
