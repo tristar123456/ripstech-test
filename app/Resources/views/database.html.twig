@@ -8,12 +8,5 @@
         {% endfor %}
     </p>
 {% endfor %}
-{% for user in users %}
-    <p>{{ user.getUsername }}
-    {% for role in user.getRoles %}
-        <h1>{{ role }}</h1>
-    {% endfor %}
-    </p>
-{% endfor %}
 </body>
 </html>

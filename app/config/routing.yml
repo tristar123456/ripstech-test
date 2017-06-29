@@ -9,3 +9,5 @@ points:
 statistics:
     type: rest
     resource: AppBundle\Controller\StatisticsController
+logout:
+    path: /logout
