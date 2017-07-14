@@ -16,14 +16,11 @@ Build frontend assets:
 
 `NODE_ENV=production gulp`
 
-Database config is set to use postgres. After creating a table and user run:
+To initalize the doctrine database type:
 
-`bin/console doctrine:database:create`
+`php bin/console doctrine:migrations:migrate`
 
-Validate and update database schema:
-
-`bin/console doctrine:schema:update --force`
-`bin/console doctrine:schema:validate`
+and confirm the following warning with an `y`.
 
 Add geolocation data:
 

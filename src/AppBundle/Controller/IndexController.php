@@ -20,8 +20,7 @@ class IndexController extends Controller
 
     public function indexAction()
     {
-        /*$user = new User();
-        $column = $table->findOneBy(array("username"=>$un,"password"=>$pw))
+        $user = $this->getUser();
         foreach($user->getRoles() as $role) {
             if ($role == "ROLE_UI") {}
             elseif ($role == "ROLE_API") {
@@ -30,7 +29,7 @@ class IndexController extends Controller
             else{}
         }
         throw $this->createAccessDeniedException("NOT HAVE NOT SUFFICENT RIGHTS TO SEE THIS PAGE!");
-        */
+
         return $this->render("index.html.twig");
     }
     /**

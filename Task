@@ -1,0 +1,9 @@
+{{1,'Telekom','Berlin','Scanning'},{2,'Unitymedia','München','Installed'}}
+
+
+$data = file_get_contents('http://localhost/data.json');
+$array = json_decode($data);
+
+foreach($array as $customer) {
+    $id = customer[0];
+}

@@ -8,7 +8,7 @@ use Doctrine\DBAL\Schema\Schema;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-class Version20170629145114 extends AbstractMigration
+class Version20170714101505 extends AbstractMigration
 {
     /**
      * @param Schema $schema
@@ -22,8 +22,6 @@ class Version20170629145114 extends AbstractMigration
         $table->addColumn("password", "string");
         $table->addColumn("is_active","boolean");
         $table->addColumn("roles","array");
-
-
     }
 
     /**
@@ -31,7 +29,7 @@ class Version20170629145114 extends AbstractMigration
      */
     public function down(Schema $schema)
     {
-       $schema->dropTable("users");
+        $schema->dropTable("users");
 
     }
 }
