@@ -1,0 +1,65 @@
+<html>
+<head>
+    <style>
+        body{
+            font-family: Arial;
+            color: white;
+            background-color: #c0c0c0;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+            margin-left: 300px;
+            margin-right: 300px;
+        }
+        input{
+            color: #7c8ea3;
+            padding: 0px;
+            margin: 0px;
+
+        }
+        button{
+            margin-top: 10px;
+        }
+        #content{
+            background-color: rgb(47, 53, 58);
+        }
+        #logo{
+            display: block;
+            height:95px;
+            width: 200px;
+            padding-top: 20px;
+            margin: auto;
+        }
+        #box{
+            position: relative;
+            text-align: center;
+            padding: 7%;
+            border: 1px dashed #7c8ea3;
+            border-left: 0;
+            border-right: 0;
+        }
+        #bottom{
+            height: 60px;
+        }
+    </style>
+
+
+    <title>Add Points</title>
+</head>
+<body>
+<div id="content">
+    <div id="logo">
+        <img src="https://www.ripstech.com/img/rips_logo.svg">
+    </div>
+    <div id="box">
+        <form action="{{ path("add_points") }}" method="post">
+            <label for="IP">
+                IP - Adresse:
+            </label><br>
+            <input type="text" id="ip" name="_ip"><br>
+            <button type="submit">CONFIRM</button>
+        </form>
+    </div>
+    <div id="bottom"></div>
+</div>
+</body>
+</html>
