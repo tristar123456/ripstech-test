@@ -4,7 +4,9 @@ namespace AppBundle\Controller;
 
 use DateTime;
 use AppBundle\Entity\Point;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 class PointsController extends FOSRestController
@@ -43,6 +45,11 @@ class PointsController extends FOSRestController
                                 'type' => 'string',
                                 'required' => false,
                             ],
+                            'name' => [
+                                'decription' => 'Name of the Point',
+                                'type' => 'string',
+                                'required' => false,
+                            ],
                         ],
                         'example' => [
                             'lat' => 55.55,
@@ -58,7 +65,6 @@ class PointsController extends FOSRestController
 
         return $this->handleView($view);
     }
-
     public function getPointsAction()
     {
         $repository = $this->getDoctrine()->getRepository('AppBundle:Point');
@@ -68,6 +74,10 @@ class PointsController extends FOSRestController
         return $this->handleView($view);
     }
 
+    /**
+     * @param Request $request
+     * @Route("/points",name="add_points")
+     */
     public function postPointsAction(Request $request)
     {
         $point = new Point();
@@ -84,33 +94,45 @@ class PointsController extends FOSRestController
             } else {
                 $error = ['message' => 'Invalid IP address provided.'];
                 $view = $this->view($error, 400);
+                return $this->render("points.html.twig");
             }
-        } else {
+        }
+        elseif($input->has('lat') && $input->has('long')) {
             $lat = $input->get('lat');
             $long = $input->get('long');
         }
-
-        $point->setLat($lat);
-        $point->setLong($long);
-        $point->setCreatedAt(new DateTime());
-
-        if ($input->has('icon')) {
-            $point->setIcon($input->get('icon'));
+        else{
+            return $this->render("points.html.twig");
         }
+        if(isset($lat) && isset($long)) {
+            $point->setLat($lat);
+            $point->setLong($long);
+            if($input->has("point_name")){
+                $point->setPointName($input->get("point_name"));
+            }
+            $point->setCreatedAt(new DateTime());
 
-        $validator = $this->get('validator');
-        $errors = $validator->validate($point);
+            if ($input->has('icon')) {
+                $point->setIcon($input->get('icon'));
+            }
 
-        if (count($errors) > 0) {
-            $view = $this->view($errors, 400);
-        } else {
-            $em = $this->getDoctrine()->getManager();
-            $view = $this->view($point, 200);
+            $validator = $this->get('validator');
+            $errors = $validator->validate($point);
 
-            $em->persist($point);
-            $em->flush();
+            if (count($errors) > 0) {
+                $view = $this->view($errors, 400);
+            } else {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($point);
+                $em->flush();
+            }
         }
-
-        return $this->handleView($view);
+        // LONG UND LAT AN INDEX UEBERGEBEN
+        $Points = $this->getDoctrine()->getRepository("AppBundle:Point")->findAll();
+        if($Points == null){
+            return $this->render("add_points");
+        }else {
+            return $this->render("index.html.twig", array("points" =>$Points));
+        }
     }
 }

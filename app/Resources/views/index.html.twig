@@ -3,40 +3,45 @@
 <head>
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RIPSTech Test</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-          type="text/css" media="all"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/superslides/0.6.2/stylesheets/superslides.min.css"
-          integrity="sha256-JOC7rBmaiSGpAsZU+tepFbvEYdXxTDbLDRHt0DDwpf0=" crossorigin="anonymous"/>
+    <!-- LEAFLET -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css"
+          integrity="sha512-wcw6ts8Anuw10Mzh9Ytw4pylW8+NAD4ch3lqm9lzAsTxg0GFeJgoAtxuCLREZSC5lUXdVyo/7yfsqFjQ4S+aKw=="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js"
+            integrity="sha512-mNqn2Wg7tSToJhvHcqfzLMU6J4mkOImSPTxVZAdo+lcPlk+GhZmYgACEe0x35K7YzW1zJ7XyJV/TT1MrdXvMcA=="
+            crossorigin=""></script>
     <link rel="stylesheet" href="/dist/css/main.css" type="text/css" media="all"/>
 </head>
 <body>
+<div id="app"></div>
 
-
-<div id="slides">
-    <div class="slides-container">
-        <div id="app"></div>
-        <div id="chart"></div>
-    </div>
-</div>
-
-<div id="controls">
+<!--<div id="controls">
     <button onclick="togglePlay()">
         <i class="fa fa-pause"></i>
     </button>
-</div>
+</div>-->
+<!--<script src="/dist/js/index.js" type="text/javascript" charset="utf-8"></script>-->
+<script>
+    var map = L.map('app').setView([51.505, -0.09], 3);
 
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+        maxZoom: 18,
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+        '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+        'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+        id: 'mapbox.streets'
+    }).addTo(map);
 
-
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"
-        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/superslides/0.6.2/jquery.superslides.min.js"
-        integrity="sha256-BJ5ztlXSWc6WOZ5VMVCJgtKomDBVPstatOGAeCmDIZ8=" crossorigin="anonymous"></script>
-<script src="/dist/js/index.js" type="text/javascript" charset="utf-8"></script>
+    {% if points is defined %}
+    {% for point in points %}
+    var marker = L.marker([
+        {{ point.getLat }},
+        {{ point.getLong }}
+        ]).addTo(map).bindPopup("<b>{{ point.getPointName }}</b>").openPopup();
+    {% endfor %}
+    {% endif %}
+</script>
 </body>
 </html>

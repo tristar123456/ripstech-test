@@ -53,9 +53,13 @@
     <div id="box">
         <form action="{{ path("add_points") }}" method="post">
             <label for="IP">
-                IP - Adresse:
+                IP - adress:
             </label><br>
-            <input type="text" id="ip" name="_ip"><br>
+            <input type="text" id="ip" name="ip"><br>
+            <label for="Point_name">
+                Name of the point (not required) :
+            </label><br>
+            <input type="text" id="point_name" name="point_name"><br>
             <button type="submit">CONFIRM</button>
         </form>
     </div>

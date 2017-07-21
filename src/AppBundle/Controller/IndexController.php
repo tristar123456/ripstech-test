@@ -24,13 +24,16 @@ class IndexController extends Controller
         foreach($user->getRoles() as $role) {
             if ($role == "ROLE_UI") {}
             elseif ($role == "ROLE_API") {
-                return $this->render('index.html.twig');
+                $points = $this->getDoctrine()->getRepository("AppBundle:Point")->findAll();
+                if($points == null){
+                    return $this->render("index.html.twig");
+                }
+                return $this->render("index.html.twig", array("points"=> $points));
             }
             else{}
         }
         throw $this->createAccessDeniedException("NOT HAVE NOT SUFFICENT RIGHTS TO SEE THIS PAGE!");
 
-        return $this->render("index.html.twig");
     }
     /**
      * @Route("/database/", name="database")

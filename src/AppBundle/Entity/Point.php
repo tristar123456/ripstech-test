@@ -63,6 +63,13 @@ class Point
     private $icon = 'chevron-down';
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="point_name", type="string")
+     */
+    private $point_name;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
@@ -152,6 +159,34 @@ class Point
         return $this->icon;
     }
 
+    /**
+     *
+     * Set point_name
+     *
+     * @param string $point_name
+     *
+     * @return Point
+     *
+     */
+    public function setPointName($point_name)
+    {
+        if($point_name==null){
+            $this->point_name == "";
+        }else {
+            $this->point_name = $point_name;
+        }
+        return $this;
+    }
+
+    /**
+     * Get point_name
+     *
+     * @return string
+     */
+    public function getPointName()
+    {
+        return $this->point_name;
+    }
     /**
      * Set createdAt
      *
