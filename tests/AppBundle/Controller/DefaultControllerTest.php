@@ -4,15 +4,25 @@ namespace Tests\AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class DefaultControllerTest extends WebTestCase
-{
-    public function testIndex()
-    {
+class DefaultControllerTest extends WebTestCase{
+
+    public function testPointController(){
         $client = static::createClient();
+        //Todo:GET
+        $crawler = $client->request('GET', array(array("/"),array("/points"));
 
-        $crawler = $client->request('GET', '/');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertContains('Welcome to Symfony', $crawler->filter('#container h1')->text());
+        //Todo:POST
+        $crawler = $client->request('POST', '/points');
+
+        $form = $crawler->selectButton('submit')->form();
+
+        $form['ip']="8.8.8.8";
+        $form['name']="";
+
+        $crawler= $client->submit($form);
+
+
     }
+
 }

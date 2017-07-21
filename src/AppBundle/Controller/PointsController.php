@@ -69,9 +69,11 @@ class PointsController extends FOSRestController
     {
         $repository = $this->getDoctrine()->getRepository('AppBundle:Point');
         $points = $repository->findAll();
-        $view = $this->view($points, 200);
-
-        return $this->handleView($view);
+        if($points == null){
+            return $this->render("add_points");
+        }else {
+            return $this->render("index.html.twig", array("points" =>$points));
+        }
     }
 
     /**
